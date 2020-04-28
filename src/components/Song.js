@@ -1,13 +1,20 @@
 import React from "react";
 
-const Song = function () {
+const Song = function (props) {
+	const onButtonClick = function (evt) {
+		props.selectFeatureSongHandler(props.song);
+	};
+
 	return (
 		<div className="item">
 			<div className="content">
-				<div className="header">Song 1</div>
+				<div className="header">{props.song.title}</div>
 				<div className="extra">
-					<button className="ui right floated secondary button">
-						Okay
+					<button
+						className="ui right floated secondary button"
+						onClick={onButtonClick}
+					>
+						Play
 					</button>
 				</div>
 			</div>
