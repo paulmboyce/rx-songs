@@ -1,8 +1,9 @@
 import React from "react";
+import { connect } from "react-redux";
 
-const SongDetail = function (props) {
-	if (!props.song) {
-		return "";
+const SongDetail = function ({ song }) {
+	if (!song) {
+		return <div>Select a song...</div>;
 	} else {
 		return (
 			<div className="ui segment">
@@ -12,14 +13,18 @@ const SongDetail = function (props) {
 				<br />
 				<br />
 				<div>
-					<h2>Title: {props.song.title}</h2>
+					<h2>Title: {song.title}</h2>
 				</div>
 				<div>
-					<h2>Length: {props.song.length}mins</h2>
+					<h2>Length: {song.length}mins</h2>
 				</div>
 			</div>
 		);
 	}
 };
 
-export { SongDetail };
+const mapStateToProps = (state) => {
+	return { song: state.featureSong };
+};
+
+export default connect(mapStateToProps)(SongDetail);

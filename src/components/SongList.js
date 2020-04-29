@@ -1,15 +1,12 @@
 import React from "react";
-import { Song } from "./Song";
+import Song from "./Song";
+import { connect } from "react-redux";
 
-const SongList = function (props) {
+const SongList = function ({ songs }) {
 	const renderSongs = () => {
-		return props.songs.map((song) => (
-			<Song
-				key={song.title}
-				song={song}
-				selectFeatureSongHandler={props.selectFeatureSongHandler}
-			/>
-		));
+		return songs.map((song) => {
+			return <Song key={song.title} song={song} />;
+		});
 	};
 
 	return (
@@ -19,4 +16,8 @@ const SongList = function (props) {
 	);
 };
 
-export { SongList };
+const mapStateToProps = (state) => {
+	return { songs: state.songs };
+};
+
+export default connect(mapStateToProps)(SongList);

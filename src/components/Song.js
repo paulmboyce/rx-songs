@@ -1,18 +1,19 @@
 import React from "react";
+import { connect } from "react-redux";
 
-const Song = function (props) {
-	const onButtonClick = function (evt) {
-		props.selectFeatureSongHandler(props.song);
-	};
+import { selectSongAction } from "../actionCreators";
 
+const Song = function ({ song, selectSongAction }) {
 	return (
 		<div className="item">
 			<div className="content">
-				<div className="header">{props.song.title}</div>
+				<div className="header">{song.title}</div>
 				<div className="extra">
 					<button
 						className="ui right floated secondary button"
-						onClick={onButtonClick}
+						onClick={() => {
+							selectSongAction(song);
+						}}
 					>
 						Play
 					</button>
@@ -22,4 +23,4 @@ const Song = function (props) {
 	);
 };
 
-export { Song };
+export default connect(null, { selectSongAction })(Song);
